@@ -70,7 +70,6 @@ dependencies {
     implementation rootProject.ext.dependencies.pager
     implementation rootProject.ext.dependencies.pagerIndicator
 
-    implementation rootProject.ext.dependencies.splashScreen
     kapt "com.google.dagger:hilt-compiler:2.44"
 
     testImplementation 'junit:junit:4.13.2'
