@@ -42,7 +42,7 @@ import com.google.accompanist.pager.rememberPagerState
 @Composable
 fun WelcomeScreen(
     modifier: Modifier = Modifier,
-    onGettingStartedClick: () -> Unit
+    onBeginClick: () -> Unit,
 ) {
     val list = Page.onBoardingScreens
     val pagerState = rememberPagerState(0)
@@ -85,7 +85,7 @@ fun WelcomeScreen(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(30.dp),
-                onClick = onGettingStartedClick,
+                onClick = onBeginClick,
                 colors = ButtonDefaults.outlinedButtonColors(
                     backgroundColor = colorResource(R.color.purple_500),
                     contentColor = Color.White)) {

@@ -62,6 +62,8 @@ dependencies {
     implementation rootProject.ext.dependencies.composePreview
     implementation rootProject.ext.dependencies.composeM3
 
+    implementation rootProject.ext.dependencies.navigation
+
     implementation rootProject.ext.dependencies.hilt
     implementation rootProject.ext.dependencies.hiltNavigation
 

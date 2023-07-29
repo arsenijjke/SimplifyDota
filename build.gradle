@@ -34,6 +34,7 @@ ext {
     dependencies.composePreview = 'androidx.compose.ui:ui-tooling-preview'
     dependencies.composeM3 = 'androidx.compose.material3:material3'
     dependencies.composeBom = 'androidx.compose:compose-bom:2023.06.01'
+    dependencies.navigation = 'androidx.navigation:navigation-compose:2.6.0'
 
     /* Pager and Indicators - Accompanist */
     dependencies.pager = "com.google.accompanist:accompanist-pager:$accompanist_version"
