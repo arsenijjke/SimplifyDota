@@ -1,13 +1,17 @@
 package app.arsenijjke.simplifydota.ui.screen.onboarding.viewmodel
 
 import androidx.lifecycle.ViewModel
-import androidx.navigation.NavHostController
+import app.arsenijjke.navigation.destination.Destination
+import app.arsenijjke.navigation.navigator.Navigator
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class OnBoardingViewModel(
-    private val navController: NavHostController,
+@HiltViewModel
+class OnBoardingViewModel @Inject constructor(
+    private val navigator: Navigator
 ): ViewModel() {
 
     fun navigateToRegistration() {
-        navController.navigate("home_screen")
+        navigator.tryNavigateTo(Destination.HomeScreen())
     }
 }

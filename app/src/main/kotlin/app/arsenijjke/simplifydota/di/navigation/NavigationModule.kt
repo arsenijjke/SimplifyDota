@@ -1,15 +1,18 @@
 package app.arsenijjke.simplifydota.di.navigation
 
 import app.arsenijjke.navigation.impl.NavigatorImpl
+import app.arsenijjke.navigation.navigator.Navigator
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
-@InstallIn(ActivityRetainedComponent::class)
-internal object NavigationModule {
+@InstallIn(SingletonComponent::class)
+interface NavigationModule {
 
-    @Provides
-    fun provideNavigator(): NavigatorImpl = NavigatorImpl()
+    @Singleton
+    @Binds
+    fun bindAppNavigator(appNavigatorImpl: NavigatorImpl): Navigator
 }

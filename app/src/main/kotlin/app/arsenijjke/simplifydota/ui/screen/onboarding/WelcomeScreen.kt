@@ -32,7 +32,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import app.arsenijjke.simplifydota.R
+import app.arsenijjke.simplifydota.ui.screen.onboarding.viewmodel.OnBoardingViewModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
@@ -42,8 +44,9 @@ import com.google.accompanist.pager.rememberPagerState
 @Composable
 fun WelcomeScreen(
     modifier: Modifier = Modifier,
-    onBeginClick: () -> Unit,
+    viewModel: OnBoardingViewModel = hiltViewModel(),
 ) {
+
     val list = Page.onBoardingScreens
     val pagerState = rememberPagerState(0)
 
@@ -85,7 +88,7 @@ fun WelcomeScreen(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(30.dp),
-                onClick = onBeginClick,
+                onClick = { viewModel.navigateToRegistration() },
                 colors = ButtonDefaults.outlinedButtonColors(
                     backgroundColor = colorResource(R.color.purple_500),
                     contentColor = Color.White)) {

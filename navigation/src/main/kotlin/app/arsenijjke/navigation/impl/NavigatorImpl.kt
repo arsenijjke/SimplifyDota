@@ -7,6 +7,7 @@ import kotlinx.coroutines.channels.Channel
 import javax.inject.Inject
 
 class NavigatorImpl @Inject constructor() : Navigator {
+
     override val navigationChannel = Channel<NavigationIntent>(
         capacity = Int.MAX_VALUE,
         onBufferOverflow = BufferOverflow.DROP_LATEST,
