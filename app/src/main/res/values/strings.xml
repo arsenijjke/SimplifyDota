@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SimplifyDota</string>
-    
+
+    /* OnBoarding Screen */
     <string name="welcome_screen_title">Greetings my Friend!</string>
     <string name="welcome_screen_subtitle">Find out about how to increase your skill in Dota 2, what heroes have higher win rate, your statistics and much more</string>
     <string name="your_progress_title">Your progress and statistics in one place</string>
@@ -8,4 +9,9 @@
     <string name="follow_meta_subtitle">Follow the meta and the indicators of the best players</string>
     <string name="follow_meta_title">Conquer the peaks</string>
     <string name="button_begin">Begin</string>
+
+    /* Profile setup screen */
+    <string name="before_start">Before we start</string>
+    <string name="dota_profile">Connect your Dota profile</string>
+    <string name="title_text">Your profile number</string>
 </resources>

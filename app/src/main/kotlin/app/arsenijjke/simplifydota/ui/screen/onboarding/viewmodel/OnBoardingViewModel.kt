@@ -12,6 +12,6 @@ class OnBoardingViewModel @Inject constructor(
 ): ViewModel() {
 
     fun navigateToRegistration() {
-        navigator.tryNavigateTo(Destination.HomeScreen())
+        navigator.tryNavigateTo(Destination.AccountScreen())
     }
 }

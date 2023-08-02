@@ -11,8 +11,8 @@ import app.arsenijjke.navigation.destination.Destination
 import app.arsenijjke.navigation.host.NavHost
 import app.arsenijjke.navigation.host.composable
 import app.arsenijjke.navigation.navigator.NavigationIntent
-import app.arsenijjke.simplifydota.ui.screen.home.HomeScreen
 import app.arsenijjke.simplifydota.ui.screen.onboarding.WelcomeScreen
+import app.arsenijjke.simplifydota.ui.screen.registration.RegistrationScreen
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 
@@ -33,8 +33,8 @@ fun MainScreen(
         composable(destination = Destination.OnBoardingScreen) {
             WelcomeScreen()
         }
-        composable(destination = Destination.HomeScreen) {
-            HomeScreen()
+        composable(destination = Destination.AccountScreen) {
+            RegistrationScreen()
         }
 
     }
