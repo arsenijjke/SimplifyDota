@@ -16,3 +16,5 @@ rootProject.name = "SimplifyDota"
 include ':app'
 include ':uikit'
 include ':navigation'
+include ':domain'
+include ':data'
