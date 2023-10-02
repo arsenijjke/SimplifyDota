@@ -8,7 +8,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
-    private val navigator: Navigator
+    private val navigator: Navigator,
+
 ): ViewModel() {
 
     fun navigateToRegistration() {
