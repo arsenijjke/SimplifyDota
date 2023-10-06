@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalPagerApi::class)
 
-package app.arsenijjke.simplifydota.ui.screen.onboarding
+package app.arsenijjke.simplifydota.ui.screen.onboarding.screen
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image

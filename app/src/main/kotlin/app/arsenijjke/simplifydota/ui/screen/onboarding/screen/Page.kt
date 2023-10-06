@@ -1,4 +1,4 @@
-package app.arsenijjke.simplifydota.ui.screen.onboarding
+package app.arsenijjke.simplifydota.ui.screen.onboarding.screen
 
 import androidx.annotation.DrawableRes
 import app.arsenijjke.simplifydota.R
