@@ -13,13 +13,13 @@ sealed class Destination(protected val route: String, vararg params: String) {
 
     object OnBoardingScreen : NoArgumentsDestination(ON_BOARDING_SCREEN)
 
-    object AccountScreen : NoArgumentsDestination(ACCOUNT_SCREEN)
+    object RegistrationScreen : NoArgumentsDestination(REGISTRATION_SCREEN)
 
     object ProfileScreen : NoArgumentsDestination(PROFILE_SCREEN)
 
     companion object {
         private const val ON_BOARDING_SCREEN = "onboarding_screen"
-        private const val ACCOUNT_SCREEN = "account_screen"
+        private const val REGISTRATION_SCREEN = "registration_screen"
         private const val PROFILE_SCREEN = "profile_screen"
     }
 

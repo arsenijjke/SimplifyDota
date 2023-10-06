@@ -9,10 +9,6 @@ class OnBoardingRepositoryImpl @Inject constructor(
     private val preferencesService: PreferenceService,
 ): OnBoardingRepository {
 
-    override fun isFirstTimeUsingApp(): Flow<Boolean?> {
-        return preferencesService.isFirstTimeUsingApp()
-    }
-
     override fun saveProfileId(id: Int): Flow<Unit> {
         TODO("Not yet implemented")
     }
