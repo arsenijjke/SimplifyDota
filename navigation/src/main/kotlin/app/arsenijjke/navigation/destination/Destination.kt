@@ -9,13 +9,12 @@ sealed class Destination(protected val route: String, vararg params: String) {
 
     sealed class NoArgumentsDestination(route: String) : Destination(route) {
         operator fun invoke(): String = route
+        object OnBoardingScreen : NoArgumentsDestination(ON_BOARDING_SCREEN)
+
+        object RegistrationScreen : NoArgumentsDestination(REGISTRATION_SCREEN)
+
+        object ProfileScreen : NoArgumentsDestination(PROFILE_SCREEN)
     }
-
-    object OnBoardingScreen : NoArgumentsDestination(ON_BOARDING_SCREEN)
-
-    object RegistrationScreen : NoArgumentsDestination(REGISTRATION_SCREEN)
-
-    object ProfileScreen : NoArgumentsDestination(PROFILE_SCREEN)
 
     companion object {
         private const val ON_BOARDING_SCREEN = "onboarding_screen"

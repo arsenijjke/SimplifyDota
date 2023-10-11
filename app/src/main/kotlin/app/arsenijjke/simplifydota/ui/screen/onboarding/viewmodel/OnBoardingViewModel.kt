@@ -1,16 +1,16 @@
 package app.arsenijjke.simplifydota.ui.screen.onboarding.viewmodel
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import app.arsenijjke.data.service.PreferenceService
+import app.arsenijjke.domain.onboarding.usecase.OnBoardingUseCase
 import app.arsenijjke.navigation.destination.Destination
 import app.arsenijjke.navigation.navigator.Navigator
 import app.arsenijjke.simplifydota.ui.screen.onboarding.event.NavigateToRegistrationScreenEvent
 import app.arsenijjke.simplifydota.ui.screen.onboarding.event.OnBoardingEvent
-import app.arsenijjke.simplifydota.ui.screen.onboarding.event.SaveAppUsageEvent
 import app.arsenijjke.simplifydota.ui.screen.onboarding.state.OnBoardingState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class OnBoardingViewModel @Inject constructor(
     private val navigator: Navigator,
-    private val preferenceService: PreferenceService,
+    private val onBoardingUseCase: OnBoardingUseCase
 ): ViewModel() {
 
     var state by mutableStateOf(OnBoardingState())
@@ -28,10 +28,8 @@ class OnBoardingViewModel @Inject constructor(
 
     fun send(event: OnBoardingEvent) {
         when(event) {
-            is SaveAppUsageEvent -> {
-                save()
-            }
             is NavigateToRegistrationScreenEvent -> {
+                save()
                 navigateToRegistration()
             }
         }
@@ -39,12 +37,13 @@ class OnBoardingViewModel @Inject constructor(
 
     private fun save() {
         viewModelScope.launch(Dispatchers.IO) {
-            preferenceService.saveTimeUsingApp(true)
+            onBoardingUseCase.saveAppUsage(false)
+            Log.d("ABCD","SASVED")
         }
     }
 
     private fun navigateToRegistration() {
-        navigator.tryNavigateTo(Destination.RegistrationScreen())
+        navigator.tryNavigateTo(Destination.NoArgumentsDestination.RegistrationScreen())
     }
 
 }

@@ -21,8 +21,10 @@ import kotlinx.coroutines.flow.receiveAsFlow
 
 @Composable
 fun MainScreen(
-    containerViewModel: ContainerViewModel = hiltViewModel()
+    containerViewModel: ContainerViewModel,
+    startDestination: Destination
 ) {
+
     val onBoardingViewModel = hiltViewModel<OnBoardingViewModel>()
     val navController = rememberNavController()
 
@@ -32,17 +34,17 @@ fun MainScreen(
     )
     NavHost(
         navController = navController,
-        startDestination = Destination.OnBoardingScreen
+        startDestination = startDestination
     ) {
         val onBoardingState = onBoardingViewModel.state
-        composable(destination = Destination.OnBoardingScreen) {
+        composable(destination = Destination.NoArgumentsDestination.OnBoardingScreen) {
             OnBoardingScreen(
                 state = onBoardingState,
                 onEvent = { onBoardingViewModel.send(NavigateToRegistrationScreenEvent()) }
             )
         }
 
-        composable(destination = Destination.RegistrationScreen) {
+        composable(destination = Destination.NoArgumentsDestination.RegistrationScreen) {
             RegistrationScreen()
         }
 

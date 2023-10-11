@@ -10,5 +10,4 @@ class ContainerRepositoryImpl @Inject constructor(
 ): ContainerRepository {
 
     override fun isFirstTimeUsingApp(): Flow<Boolean?> = preferenceService.isFirstTimeUsingApp()
-
 }

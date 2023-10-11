@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalPagerApi::class)
-
 package app.arsenijjke.simplifydota.ui.screen.onboarding.screen
 
 import androidx.compose.animation.AnimatedVisibility
@@ -33,8 +31,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.arsenijjke.simplifydota.R
-import app.arsenijjke.simplifydota.ui.screen.onboarding.event.NavigateToRegistrationScreenEvent
-import app.arsenijjke.simplifydota.ui.screen.onboarding.event.OnBoardingEvent
 import app.arsenijjke.simplifydota.ui.screen.onboarding.state.OnBoardingState
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -46,7 +42,7 @@ import com.google.accompanist.pager.rememberPagerState
 fun OnBoardingScreen(
     modifier: Modifier = Modifier,
     state: OnBoardingState,
-    onEvent: (OnBoardingEvent) -> Unit
+    onEvent: () -> Unit
 ) {
 
     val pagerState = rememberPagerState(state.initialPage)
@@ -83,7 +79,7 @@ fun OnBoardingScreen(
         )
 
         AnimatedVisibility(visible = isLastPage.value) {
-            StyledOutlinedButton(onClick = { onEvent(NavigateToRegistrationScreenEvent()) })
+            StyledOutlinedButton(onClick = onEvent)
         }
     }
 }
@@ -134,14 +130,14 @@ fun OnBoardingPageUI(
 @Composable
 fun StyledOutlinedButton(
     modifier: Modifier = Modifier,
-    onClick: (Unit) -> (Unit),
+    onClick: () -> (Unit),
 ) {
     OutlinedButton(
         shape = RoundedCornerShape(15.dp),
         modifier = modifier
             .fillMaxWidth()
             .padding(30.dp),
-        onClick = { onClick },
+        onClick = onClick,
         colors = ButtonDefaults.outlinedButtonColors(
             backgroundColor = colorResource(R.color.purple_500),
             contentColor = Color.White

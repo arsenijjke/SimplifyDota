@@ -15,17 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import app.arsenijjke.simplifydota.R
-import app.arsenijjke.simplifydota.ui.screen.onboarding.viewmodel.RegistrationViewModel
-import app.arsenijjke.simplifydota.ui.theme.components.StyledOutlinedButton
 
 @Composable
 fun RegistrationScreen(
     modifier: Modifier = Modifier,
 ) {
-
-    val viewModel: RegistrationViewModel = hiltViewModel()
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
@@ -44,7 +39,7 @@ fun RegistrationScreen(
 
         Spacer(modifier = modifier.padding(50.dp))
 
-        StyledOutlinedButton(onClick = { } )
+        StyledOutlinedButton(onClick = { })
         //onClick = { viewModel.navigateToProfile() }
     }
 }
