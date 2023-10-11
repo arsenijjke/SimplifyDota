@@ -11,6 +11,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
@@ -19,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -28,10 +32,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import app.arsenijjke.simplifydota.R
-import app.arsenijjke.simplifydota.ui.screen.onboarding.viewmodel.OnBoardingViewModel
-import app.arsenijjke.simplifydota.ui.theme.components.StyledOutlinedButton
+import app.arsenijjke.simplifydota.ui.screen.onboarding.event.NavigateToRegistrationScreenEvent
+import app.arsenijjke.simplifydota.ui.screen.onboarding.event.OnBoardingEvent
+import app.arsenijjke.simplifydota.ui.screen.onboarding.state.OnBoardingState
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
@@ -39,15 +43,13 @@ import com.google.accompanist.pager.rememberPagerState
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun WelcomeScreen(
+fun OnBoardingScreen(
     modifier: Modifier = Modifier,
+    state: OnBoardingState,
+    onEvent: (OnBoardingEvent) -> Unit
 ) {
 
-    val viewModel: OnBoardingViewModel = hiltViewModel()
-
-    val list = Page.onBoardingScreens
-    val pagerState = rememberPagerState(0)
-
+    val pagerState = rememberPagerState(state.initialPage)
     val isLastPage = remember {
         derivedStateOf { pagerState.currentPage == 2 }
     }
@@ -67,9 +69,9 @@ fun WelcomeScreen(
                 .fillMaxWidth()
                 .weight(1f),
             state = pagerState,
-            count = list.size,
+            count = state.pages.size,
         ) { page ->
-            OnBoardingPageUI(page = list[page])
+            OnBoardingPageUI(page = state.pages[page])
         }
 
         HorizontalPagerIndicator(
@@ -80,8 +82,8 @@ fun WelcomeScreen(
             activeColor = colorResource(R.color.purple_500)
         )
 
-        AnimatedVisibility(visible = isLastPage.value ) {
-            StyledOutlinedButton { viewModel.navigateToRegistration() }
+        AnimatedVisibility(visible = isLastPage.value) {
+            StyledOutlinedButton(onClick = { onEvent(NavigateToRegistrationScreenEvent()) })
         }
     }
 }
@@ -126,6 +128,26 @@ fun OnBoardingPageUI(
             fontSize = 18.sp,
         )
         Spacer(modifier = modifier.height(12.dp))
+    }
+}
+
+@Composable
+fun StyledOutlinedButton(
+    modifier: Modifier = Modifier,
+    onClick: (Unit) -> (Unit),
+) {
+    OutlinedButton(
+        shape = RoundedCornerShape(15.dp),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(30.dp),
+        onClick = { onClick },
+        colors = ButtonDefaults.outlinedButtonColors(
+            backgroundColor = colorResource(R.color.purple_500),
+            contentColor = Color.White
+        )
+    ) {
+        Text(text = stringResource(id = R.string.button_begin))
     }
 }
 

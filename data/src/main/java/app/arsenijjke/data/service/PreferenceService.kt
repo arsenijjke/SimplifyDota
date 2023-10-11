@@ -21,6 +21,7 @@ class PreferenceService(
         private val PROFILE_ID_KEY = intPreferencesKey("PROFILE_ID")
     }
 
+    /** On-boarding Zone*/
     override fun isFirstTimeUsingApp(): Flow<Boolean?> {
         return context.dataStore.data.map { preferences ->
             preferences[FIRST_TIME_USING_APP_KEY]
@@ -39,6 +40,7 @@ class PreferenceService(
         }
     }
 
+    /** Profile zone*/
     override fun getProfileId(): Flow<Int> {
         TODO("Not yet implemented")
     }

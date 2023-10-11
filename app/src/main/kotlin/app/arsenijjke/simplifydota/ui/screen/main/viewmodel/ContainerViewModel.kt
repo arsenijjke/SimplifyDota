@@ -1,4 +1,4 @@
-package app.arsenijjke.simplifydota.ui.screen.main
+package app.arsenijjke.simplifydota.ui.screen.main.viewmodel
 
 import androidx.lifecycle.ViewModel
 import app.arsenijjke.data.service.PreferenceService
@@ -13,5 +13,17 @@ class ContainerViewModel @Inject constructor(
 ) : ViewModel() {
 
     val navigationChannel = navigator.navigationChannel
+
+    fun save() {
+
+    }
+
+    private fun load() {
+
+    }
+
+    private fun send() {
+
+    }
 
 }

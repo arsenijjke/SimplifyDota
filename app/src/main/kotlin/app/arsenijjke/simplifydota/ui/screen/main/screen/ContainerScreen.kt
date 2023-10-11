@@ -1,4 +1,4 @@
-package app.arsenijjke.simplifydota.ui.screen.main
+package app.arsenijjke.simplifydota.ui.screen.main.screen
 
 import android.app.Activity
 import androidx.compose.runtime.Composable
@@ -11,8 +11,11 @@ import app.arsenijjke.navigation.destination.Destination
 import app.arsenijjke.navigation.host.NavHost
 import app.arsenijjke.navigation.host.composable
 import app.arsenijjke.navigation.navigator.NavigationIntent
+import app.arsenijjke.simplifydota.ui.screen.main.viewmodel.ContainerViewModel
+import app.arsenijjke.simplifydota.ui.screen.onboarding.event.NavigateToRegistrationScreenEvent
+import app.arsenijjke.simplifydota.ui.screen.onboarding.screen.OnBoardingScreen
 import app.arsenijjke.simplifydota.ui.screen.onboarding.screen.RegistrationScreen
-import app.arsenijjke.simplifydota.ui.screen.onboarding.screen.WelcomeScreen
+import app.arsenijjke.simplifydota.ui.screen.onboarding.viewmodel.OnBoardingViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 
@@ -20,6 +23,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 fun MainScreen(
     containerViewModel: ContainerViewModel = hiltViewModel()
 ) {
+    val onBoardingViewModel = hiltViewModel<OnBoardingViewModel>()
     val navController = rememberNavController()
 
     NavigationEffects(
@@ -30,9 +34,14 @@ fun MainScreen(
         navController = navController,
         startDestination = Destination.OnBoardingScreen
     ) {
+        val onBoardingState = onBoardingViewModel.state
         composable(destination = Destination.OnBoardingScreen) {
-            WelcomeScreen()
+            OnBoardingScreen(
+                state = onBoardingState,
+                onEvent = { onBoardingViewModel.send(NavigateToRegistrationScreenEvent()) }
+            )
         }
+
         composable(destination = Destination.RegistrationScreen) {
             RegistrationScreen()
         }
