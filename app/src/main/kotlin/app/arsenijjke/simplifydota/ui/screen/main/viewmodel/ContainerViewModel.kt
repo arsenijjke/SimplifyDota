@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.arsenijjke.domain.onboarding.usecase.ContainerUseCase
 import app.arsenijjke.navigation.navigator.Navigator
+import app.arsenijjke.simplifydota.ui.screen.main.state.ContainerState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,14 +19,16 @@ class ContainerViewModel @Inject constructor(
     private val containerUseCase: ContainerUseCase,
 ) : ViewModel() {
 
-    val navigationChannel = navigator.navigationChannel
-    var isFirstTimeUsingApp: MutableStateFlow<Boolean?> = MutableStateFlow(true)
+    var state: MutableStateFlow<ContainerState> = MutableStateFlow(
+        ContainerState(
+            navigationChannel = navigator.navigationChannel
+        )
+    )
+        private set
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            isFirstTimeUsingApp.tryEmit(containerUseCase.isFirstTimeUsingApp().first())
-            Log.d("ABCD", isFirstTimeUsingApp.value.toString())
+            state.tryEmit(state.value.copy(isFirstTimeUsingApp = containerUseCase.isFirstTimeUsingApp().first()))
         }
-
     }
 }
