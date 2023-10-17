@@ -8,6 +8,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import app.arsenijjke.data.service.data.AppUsagePrefs
 import app.arsenijjke.data.service.data.ProfilePrefs
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
 private val Context.dataStore by preferencesDataStore("user_preferences")
@@ -22,10 +23,10 @@ class PreferenceService(
     }
 
     /** On-boarding Zone*/
-    override fun isFirstTimeUsingApp(): Flow<Boolean?> {
+    override suspend fun isFirstTimeUsingApp(): Boolean? {
         return context.dataStore.data.map { preferences ->
             preferences[FIRST_TIME_USING_APP_KEY]
-        }
+        }.first()
     }
 
     override suspend fun saveTimeUsingApp(token: Boolean) {

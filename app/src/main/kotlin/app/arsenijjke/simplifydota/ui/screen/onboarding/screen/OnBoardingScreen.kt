@@ -150,7 +150,5 @@ fun StyledOutlinedButton(
 @Preview
 @Composable
 fun OnBoardingScreenPreview() {
-    OnBoardingScreen(state = OnBoardingState()) {
-
-    }
+    OnBoardingScreen(state = OnBoardingState()) {}
 }

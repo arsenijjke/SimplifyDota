@@ -5,9 +5,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.rememberNavController
 import app.arsenijjke.navigation.destination.Destination
-import app.arsenijjke.simplifydota.ui.screen.main.screen.ContainerScreen
+import app.arsenijjke.navigation.host.NavHost
+import app.arsenijjke.navigation.host.composable
+import app.arsenijjke.navigation.impl.NavigationEffects
 import app.arsenijjke.simplifydota.ui.screen.main.viewmodel.ContainerViewModel
+import app.arsenijjke.simplifydota.ui.screen.onboarding.event.NavigateToRegistrationScreenEvent
+import app.arsenijjke.simplifydota.ui.screen.onboarding.screen.OnBoardingScreen
+import app.arsenijjke.simplifydota.ui.screen.onboarding.screen.RegistrationScreen
+import app.arsenijjke.simplifydota.ui.screen.onboarding.viewmodel.OnBoardingViewModel
 import app.arsenijjke.simplifydota.ui.theme.SimplifyDotaTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,22 +24,43 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SimplifyDotaTheme {
-                val startDestination: Destination.NoArgumentsDestination
-
                 val containerViewModel = hiltViewModel<ContainerViewModel>()
                 val state = containerViewModel.state.collectAsState()
-                startDestination =
+
+                val onBoardingViewModel = hiltViewModel<OnBoardingViewModel>()
+                val navController = rememberNavController()
+
+                NavigationEffects(
+                    navigationChannel = state.value.navigationChannel,
+                    navHostController = navController
+                )
+
+                NavHost(
+                    navController = navController,
+                    startDestination =
                     if (state.value.isFirstTimeUsingApp == null) {
                         Destination.NoArgumentsDestination.OnBoardingScreen
                     } else {
                         Destination.NoArgumentsDestination.RegistrationScreen
                     }
+                ) {
+                    val onBoardingState = onBoardingViewModel.state
 
-                ContainerScreen(
-                    state.value,
-                    startDestination
-                )
+                    composable(destination = Destination.NoArgumentsDestination.OnBoardingScreen) {
+                        OnBoardingScreen(
+                            state = onBoardingState,
+                            onEvent = { onBoardingViewModel.send(NavigateToRegistrationScreenEvent()) }
+                        )
+                    }
+
+                    composable(destination = Destination.NoArgumentsDestination.RegistrationScreen) {
+                        RegistrationScreen()
+                    }
+
+                }
             }
         }
     }
 }
+
+
