@@ -1,6 +1,5 @@
 package app.arsenijjke.simplifydota.ui.screen.onboarding.viewmodel
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -37,8 +36,7 @@ class OnBoardingViewModel @Inject constructor(
 
     private fun save() {
         viewModelScope.launch(Dispatchers.IO) {
-            onBoardingUseCase.saveAppUsage(false)
-            Log.d("ABCD","SASVED")
+            onBoardingUseCase(false)
         }
     }
 

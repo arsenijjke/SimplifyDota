@@ -60,6 +60,8 @@ fun OnBoardingScreen(
             contentDescription = null,
         )
 
+        Spacer(modifier = modifier.height(50.dp))
+
         HorizontalPager(
             modifier = modifier
                 .fillMaxWidth()
@@ -92,7 +94,6 @@ fun OnBoardingPageUI(
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Spacer(modifier = modifier.height(50.dp))
 
         Image(
             painter = painterResource(id = page.image),
@@ -123,6 +124,7 @@ fun OnBoardingPageUI(
             textAlign = TextAlign.Center,
             fontSize = 18.sp,
         )
+
         Spacer(modifier = modifier.height(12.dp))
     }
 }
