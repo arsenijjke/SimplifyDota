@@ -4,6 +4,8 @@ import app.arsenijjke.domain.onboarding.usecase.ContainerUseCase
 import app.arsenijjke.domain.onboarding.usecase.ContainerUseCaseImpl
 import app.arsenijjke.domain.onboarding.usecase.OnBoardingUseCase
 import app.arsenijjke.domain.onboarding.usecase.OnBoardingUseCaseImpl
+import app.arsenijjke.domain.onboarding.usecase.RegistrationUseCase
+import app.arsenijjke.domain.onboarding.usecase.RegistrationUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -17,6 +19,10 @@ interface DomainBindingModule {
     @Singleton
     @Binds
     fun bindOnBoardingUseCase(useCase: OnBoardingUseCaseImpl): OnBoardingUseCase
+
+    @Singleton
+    @Binds
+    fun bindRegistrationUseCase(useCase: RegistrationUseCaseImpl): RegistrationUseCase
 
     @Singleton
     @Binds

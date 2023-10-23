@@ -7,7 +7,6 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import app.arsenijjke.data.service.data.AppUsagePrefs
 import app.arsenijjke.data.service.data.ProfilePrefs
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
@@ -42,16 +41,22 @@ class PreferenceService(
     }
 
     /** Profile zone*/
-    override fun getProfileId(): Flow<Int> {
-        TODO("Not yet implemented")
+    override suspend fun getProfileId(): Int? {
+        return context.dataStore.data.map { profileId ->
+            profileId[PROFILE_ID_KEY]
+        }.first()
     }
 
     override suspend fun saveProfile(id: Int) {
-        TODO("Not yet implemented")
+        context.dataStore.edit { profileId ->
+            profileId[PROFILE_ID_KEY] = id
+        }
     }
 
     override suspend fun deleteProfile() {
-        TODO("Not yet implemented")
+        context.dataStore.edit { profileId ->
+            profileId.remove(PROFILE_ID_KEY)
+        }
     }
 
 }

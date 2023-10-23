@@ -2,6 +2,6 @@ package app.arsenijjke.simplifydota.ui.screen.onboarding.event
 
 interface RegistrationEvent
 
-class SaveAccountIdEvent() : OnBoardingEvent
+object SaveAccountIdEvent : RegistrationEvent
 
-class NavigateToProfileEvent() : OnBoardingEvent
+object NavigateToProfileEvent : RegistrationEvent

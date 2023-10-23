@@ -2,6 +2,7 @@ package app.arsenijjke.simplifydota.di.data.repository
 
 import app.arsenijjke.data.repository.onboarding.ContainerRepositoryImpl
 import app.arsenijjke.data.repository.onboarding.OnBoardingRepositoryImpl
+import app.arsenijjke.data.repository.onboarding.RegistrationRepositoryImpl
 import app.arsenijjke.data.service.PreferenceService
 import dagger.Module
 import dagger.Provides
@@ -17,6 +18,12 @@ object RepositoryProvidingModule {
     @Provides
     fun provideOnBoardingRepository(preferenceService: PreferenceService): OnBoardingRepositoryImpl {
         return OnBoardingRepositoryImpl(preferenceService)
+    }
+
+    @Singleton
+    @Provides
+    fun provideRegistrationRepository(preferenceService: PreferenceService): RegistrationRepositoryImpl {
+        return RegistrationRepositoryImpl(preferenceService)
     }
 
     @Singleton
